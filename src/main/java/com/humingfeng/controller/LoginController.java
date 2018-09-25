@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
 *@ClassName     LoginController
@@ -17,11 +18,20 @@ import org.springframework.web.bind.annotation.RestController;
 *@Version       1.0
 **/
 @RestController
-@RequestMapping("/login")
+@RequestMapping("/")
 public class LoginController {
 
     @Autowired
     private LoginService loginService;
+
+    @RequestMapping("/")
+    public ModelAndView resList() {
+
+        ModelAndView mav = new ModelAndView("login/index");
+        return mav;
+
+    }
+
 
     /**
      * 登录
