@@ -33,7 +33,16 @@ layui.use('layer', function(){
 
         });
 
+        // 验证码
+        $("#captcha").click(function() {
+            var $this = $(this);
+            var url = $this.data("src") + new Date().getTime();
+            $this.attr("src", url);
+        });
+
+
         $('#num').keyup(function(event) {
+
             $('.tel-warn').addClass('hide');
             checkBtn();
         });

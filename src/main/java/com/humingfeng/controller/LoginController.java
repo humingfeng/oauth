@@ -2,13 +2,14 @@ package com.humingfeng.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.humingfeng.service.LoginService;
+import com.humingfeng.shiro.captcha.DreamCaptcha;
 import com.humingfeng.util.CommonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
 *@ClassName     LoginController
@@ -24,6 +25,9 @@ public class LoginController {
     @Autowired
     private LoginService loginService;
 
+    @Autowired
+    private DreamCaptcha dreamCaptcha;
+
     @RequestMapping("/")
     public ModelAndView resList() {
 
@@ -31,7 +35,6 @@ public class LoginController {
         return mav;
 
     }
-
 
     /**
      * 登录
@@ -44,6 +47,16 @@ public class LoginController {
         CommonUtil.hasAllRequired(requestJson, "username,password");
         return loginService.authLogin(requestJson);
     }
+
+
+    /**
+     * 图形验证码
+     */
+    @GetMapping("captcha.jpg")
+    public void captcha(HttpServletRequest request, HttpServletResponse response) {
+        dreamCaptcha.generate(request, response);
+    }
+
 
     /**
      * 查询当前登录用户的信息
