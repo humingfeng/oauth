@@ -50,7 +50,7 @@ public class LoginController {
 
 
     /**
-     * 图形验证码
+     * 图形验证码 也可以使用Kaptcha实现
      */
     @GetMapping("captcha.jpg")
     public void captcha(HttpServletRequest request, HttpServletResponse response) {

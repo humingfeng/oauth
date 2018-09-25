@@ -6,7 +6,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.shiro.cache.Cache;
 import org.apache.shiro.cache.CacheManager;
+import org.crazycake.shiro.RedisCacheManager;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -31,7 +33,8 @@ public class DreamCaptcha implements InitializingBean {
 	private final static String DEFAULT_CHACHE_NAME = "dreamCaptchaCache";
 	private final static int DEFAULT_MAX_AGE = -1; // cookie超时默认为session会话状态
 
-	private CacheManager cacheManager;
+	@Autowired
+	private RedisCacheManager redisCacheManager;
 	private String cacheName;
 	private String cookieName;
 	
@@ -41,19 +44,7 @@ public class DreamCaptcha implements InitializingBean {
 		this.cacheName = DEFAULT_CHACHE_NAME;
 		this.cookieName = DEFAULT_COOKIE_NAME;
 	}
-	
-	public DreamCaptcha(CacheManager cacheManager) {
-		this();
-		this.cacheManager = cacheManager;
-	}
-	
-	public CacheManager getCacheManager() {
-		return cacheManager;
-	}
-	
-	public void setCacheManager(CacheManager cacheManager) {
-		this.cacheManager = cacheManager;
-	}
+
 	
 	public String getCacheName() {
 		return cacheName;
@@ -73,10 +64,10 @@ public class DreamCaptcha implements InitializingBean {
 	
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		Assert.notNull(cacheManager, "cacheManager must not be null!");
+		Assert.notNull(redisCacheManager, "cacheManager must not be null!");
 		Assert.hasText(cacheName, "cacheName must not be empty!");
 		Assert.hasText(cookieName, "cookieName must not be empty!");
-		this.dreamCaptchaCache = cacheManager.getCache(cacheName);
+		this.dreamCaptchaCache = redisCacheManager.getCache(cacheName);
 	}
 	
 	/**
