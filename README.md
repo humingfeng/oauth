@@ -10,7 +10,7 @@
 
 >Mysql、druid、Mybatis
 
->HTML5、Vue、Layer
+>HTML5、Vue、Layui
 
 >Nginx
 
