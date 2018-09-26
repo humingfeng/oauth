@@ -34,6 +34,16 @@ public class LoginController {
     @RequestMapping("/")
     public ModelAndView login() {
 
+
+        try{
+
+            JSONObject info = loginService.getInfo();
+
+        }catch (Exception e) {
+
+        }
+
+
         ModelAndView mav = new ModelAndView("login/index");
         return mav;
 
