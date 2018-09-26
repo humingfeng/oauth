@@ -46,6 +46,7 @@ public class LoginServiceImpl implements LoginService {
     public JSONObject authLogin(JSONObject jsonObject) {
         String username = jsonObject.getString("username");
         String password = jsonObject.getString("password");
+
         JSONObject returnData = new JSONObject();
         Subject currentUser = SecurityUtils.getSubject();
         UsernamePasswordToken token = new UsernamePasswordToken(username, password);

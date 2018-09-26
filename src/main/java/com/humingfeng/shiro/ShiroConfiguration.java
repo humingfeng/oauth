@@ -72,11 +72,13 @@ public class ShiroConfiguration {
         filterChainDefinitionMap.put("/css/**", "anon");//css
         filterChainDefinitionMap.put("/js/**", "anon");//js
         filterChainDefinitionMap.put("/layui/**", "anon");//layui
+        filterChainDefinitionMap.put("/build/**", "anon");
         filterChainDefinitionMap.put("/login/index", "anon");
         filterChainDefinitionMap.put("/login/auth", "anon");
         filterChainDefinitionMap.put("/login/logout", "anon");
         filterChainDefinitionMap.put("/login/**", "anon");
         filterChainDefinitionMap.put("/error", "anon");
+        filterChainDefinitionMap.put("/auth", "anon");
         filterChainDefinitionMap.put("/**", "authc");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return shiroFilterFactoryBean;

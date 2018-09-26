@@ -20,6 +20,8 @@ public enum ErrorEnum {
 
     E_20011("20011", "登陆已过期,请重新登陆"),
 
+    E_20012("20012", "验证码错误"),
+
     E_90003("90003", "缺少必填参数");
 
     private String errorCode;

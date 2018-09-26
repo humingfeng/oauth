@@ -183,13 +183,14 @@ layui.use('layer', function(){
 
         // 登录点击事件
         function sendBtn(){
+            //账号登录
             if (tab == 'account_number') {
                 $(".log-btn").click(function(){
                     // var type = 'phone';
                     var inp = $.trim($('#num').val());
                     var pass = $.md5($.trim($('#pass').val()));
                     if (checkAccount(inp) && checkPass(pass)) {
-                        var ldata = {userinp:inp,password:pass};
+                        var ldata = {username:inp,password:pass};
                         if (!$('.code').hasClass('hide')) {
                             code = $.trim($('#veri').val());
                             if (!checkCode(code)) {
@@ -198,42 +199,24 @@ layui.use('layer', function(){
                             ldata.code = code;
                         }
                         $.ajax({
-                            url: '/dologin',
+                            url: '/auth',
                             type: 'post',
                             dataType: 'json',
+                            contentType:'application/json',
                             async: true,
-                            data: ldata,
+                            data: JSON.stringify(ldata),
                             success:function(data){
-                                if (data.code == '0') {
-                                    // globalTip({'msg':'登录成功!','setTime':3,'jump':true,'URL':'http://www.ui.cn'});
-                                    globalTip(data.msg);
-                                } else if(data.code == '2') {
-                                    $(".log-btn").off('click').addClass("off");
-                                    $('.pass-err').removeClass('hide').find('em').text(data.msg);
-                                    $('.pass-err').find('i').attr('class', 'icon-warn').css("color","#d9585b");
-                                    $('.code').removeClass('hide');
-                                    $('.code').find('img').attr('src','/verifyCode?'+Math.random()).click(function(event) {
-                                        $(this).attr('src', '/verifyCode?'+Math.random());
-                                    });;
-                                    return false;
-                                } else if(data.code == '3') {
-                                    $(".log-btn").off('click').addClass("off");
-                                    $('.img-err').removeClass('hide').find('em').text(data.msg);
-                                    $('.img-err').find('i').attr('class', 'icon-warn').css("color","#d9585b");
-                                    $('.code').removeClass('hide');
-                                    $('.code').find('img').attr('src','/verifyCode?'+Math.random()).click(function(event) {
-                                        $(this).attr('src', '/verifyCode?'+Math.random());
-                                    });
-                                    return false;
-                                } else if(data.code == '1'){
-                                    $(".log-btn").off('click').addClass("off");
-                                    $('.num-err').removeClass('hide').find('em').text(data.msg);
-                                    $('.num-err').find('i').attr('class', 'icon-warn').css("color","#d9585b");
-                                    return false;
-                                }
-                            },
-                            error:function(){
 
+                                if("100" == data.returnCode){
+                                    //登录成功，进入后台首页
+                                    window.location.href = "/manage/index";
+                                }
+
+
+                            },
+                            error:function(data){
+                                // 刷新验证码
+                                $("#captcha")[0].click();
                             }
                         });
                     } else {
@@ -241,6 +224,7 @@ layui.use('layer', function(){
                     }
                 });
             } else {
+                //非账号登录
                 $(".log-btn").click(function(){
                     // var type = 'phone';
                     var phone = $.trim($('#num2').val());
