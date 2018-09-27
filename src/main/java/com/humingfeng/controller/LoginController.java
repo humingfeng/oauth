@@ -6,6 +6,8 @@ import com.humingfeng.service.LoginService;
 import com.humingfeng.shiro.captcha.DreamCaptcha;
 import com.humingfeng.util.CommonUtil;
 import org.apache.shiro.SecurityUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -26,6 +28,8 @@ import static com.humingfeng.constants.ErrorEnum.E_20012;
 @RequestMapping("/")
 public class LoginController {
 
+    private Logger logger = LoggerFactory.getLogger(LoginController.class);
+
     @Autowired
     private LoginService loginService;
 
@@ -40,7 +44,7 @@ public class LoginController {
     public ModelAndView login() {
 
         boolean authenticated = SecurityUtils.getSubject().isAuthenticated();
-
+        logger.debug("authenticated="+authenticated);
         //已登录的直接跳转
         if(authenticated){
 
