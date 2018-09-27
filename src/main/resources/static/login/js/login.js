@@ -209,7 +209,7 @@ layui.use('layer', function(){
 
                                 if("100" == data.returnCode){
                                     //登录成功，进入后台首页
-                                    window.location.href = "/manage/index";
+                                    window.location.href = "/";
                                 }
 
 

@@ -5,6 +5,7 @@ import com.humingfeng.config.exception.CommonJsonException;
 import com.humingfeng.service.LoginService;
 import com.humingfeng.shiro.captcha.DreamCaptcha;
 import com.humingfeng.util.CommonUtil;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -31,28 +32,24 @@ public class LoginController {
     @Autowired
     private DreamCaptcha dreamCaptcha;
 
+    /**
+     * 首页
+     * @return
+     */
     @RequestMapping("/")
     public ModelAndView login() {
 
+        boolean authenticated = SecurityUtils.getSubject().isAuthenticated();
 
-        try{
+        //已登录的直接跳转
+        if(authenticated){
 
-            JSONObject info = loginService.getInfo();
-
-        }catch (Exception e) {
+            ModelAndView mav = new ModelAndView("manage/index");
+            return mav;
 
         }
 
-
         ModelAndView mav = new ModelAndView("login/index");
-        return mav;
-
-    }
-
-    @RequestMapping("/manage/index")
-    public ModelAndView index() {
-
-        ModelAndView mav = new ModelAndView();
         return mav;
 
     }
