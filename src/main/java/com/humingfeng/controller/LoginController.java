@@ -58,6 +58,14 @@ public class LoginController {
 
     }
 
+//    @RequestMapping("/manage/welcome")
+//    public ModelAndView main() {
+//
+//        ModelAndView mav = new ModelAndView("manage/welcome");
+//        return mav;
+//
+//    }
+
     /**
      * 登录
      *
