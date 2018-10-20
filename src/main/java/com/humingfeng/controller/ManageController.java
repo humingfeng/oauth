@@ -24,7 +24,6 @@ public class ManageController {
 
     @RequestMapping("/welcome")
     public String welcome(Model model){
-        logger.info("ssssssddddddddddddddddddd");
         return "/manage/welcome";
     }
 

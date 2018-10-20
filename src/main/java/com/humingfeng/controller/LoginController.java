@@ -114,8 +114,15 @@ public class LoginController {
      *
      * @return
      */
-    @PostMapping("/logout")
-    public JSONObject logout() {
-        return loginService.logout();
+    @RequestMapping("/logout")
+    public ModelAndView logout() {
+
+        logger.debug("begin logout");
+
+        loginService.logout();
+
+        ModelAndView mv = new ModelAndView("login/index");
+
+        return mv;
     }
 }
