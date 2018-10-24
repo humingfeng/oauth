@@ -14,7 +14,7 @@
     <contextName>oauth</contextName>
 
     <!--定义日志文件的存储地址 -->
-    <property name="LOG_HOME" value="logs"/>
+    <property name="LOG_HOME" value="D:/workspace/oauth/logs"/>
 
     <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
         <!--此日志appender是为开发使用，只配置最底级别，控制台输出的日志级别是大于或等于此级别的日志信息-->
@@ -39,7 +39,7 @@
             </fileNamePattern>
             <!-- keep 180 days' worth of history capped at 50GB total size -->
             <maxHistory>180</maxHistory>
-            <totalSizeCap>40GB</totalSizeCap>
+            <totalSizeCap>4GB</totalSizeCap>
         </rollingPolicy>
         <!-- 日志文件的格式 -->
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">

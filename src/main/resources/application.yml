@@ -14,6 +14,12 @@ server:
       maxThreads: 200
       minSpareThreads: 20
 
+##配置日志
+logging:
+  level:
+    org.springframework.web: DEBUG,CONSOLE
+  config: classpath:logback.xml
+
 
 spring:
   datasource:
@@ -21,9 +27,9 @@ spring:
       # 数据库访问配置, 使用druid数据源
       type: com.alibaba.druid.pool.DruidDataSource
       driver-class-name: com.mysql.jdbc.Driver
-      url: jdbc:mysql://localhost:3306/oauth?characterEncoding=utf-8&autoReconnect=true&failOverReadOnly=false
-      username: hu
-      password: gwssi
+      url: jdbc:mysql://IP:3306/oauth?characterEncoding=utf-8&autoReconnect=true&failOverReadOnly=false
+      username: NAME
+      password: PD
       # 连接池配置
       initial-size: 5
       min-idle: 5
@@ -88,9 +94,9 @@ spring:
     cache: false
 
   redis:
-    host: localhost
+    host: IP
     port: 6379
-    password: 2018humingfeng
+    password: PASSWORD
     minIdle: 10
     maxIdle: 50
     maxActive: 50

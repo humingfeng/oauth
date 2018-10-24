@@ -28,7 +28,7 @@ import static com.humingfeng.constants.ErrorEnum.E_20012;
 @RequestMapping("/")
 public class LoginController {
 
-    private Logger logger = LoggerFactory.getLogger(LoginController.class);
+    private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 
     @Autowired
     private LoginService loginService;
@@ -48,6 +48,9 @@ public class LoginController {
         //已登录的直接跳转
         if(authenticated){
 
+            logger.info("已登录");
+
+
             ModelAndView mav = new ModelAndView("manage/index");
             return mav;
 
@@ -57,14 +60,6 @@ public class LoginController {
         return mav;
 
     }
-
-//    @RequestMapping("/manage/welcome")
-//    public ModelAndView main() {
-//
-//        ModelAndView mav = new ModelAndView("manage/welcome");
-//        return mav;
-//
-//    }
 
     /**
      * 登录

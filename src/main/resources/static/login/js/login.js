@@ -207,14 +207,27 @@ layui.use('layer', function(){
                             data: JSON.stringify(ldata),
                             success:function(data){
 
+                                console.log("dattt=="+data)
+
                                 if("100" == data.returnCode){
                                     //登录成功，进入后台首页
                                     window.location.href = "/";
-                                }
+                                }else if("20012" == data.returnCode){
+                                    // layui.layer.open(data.returnMsg+data.returnCode);
+                                    layer.msg(data.returnMsg, {
+                                        icon: 2,
+                                        skin: 'layer-ext-moon',
+                                        time:1*1000,
+                                        title: false,
+                                        closeBtn: 0, //不显示关闭按钮
 
+                                    });
+                                    $("#captcha")[0].click();
+                                }
 
                             },
                             error:function(data){
+
                                 // 刷新验证码
                                 $("#captcha")[0].click();
                             }
