@@ -2,14 +2,14 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>欢迎页面-X-admin2.0</title>
+    <title>欢迎页面</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport"
-          content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi"/>
+    <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi"/>
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
     <link rel="stylesheet" href="./css/font.css">
     <link rel="stylesheet" href="./css/xadmin.css">
+    <link rel="stylesheet" href="./css/mobile.css">
 </head>
 <body>
 <div class="x-body">
@@ -17,7 +17,29 @@
         <legend>信息统计</legend>
         <div class="layui-field-box">
 
-            <div id="mainMap" style="height:400px;width: 700px;padding:10px;">
+            <div style="height:400px;width: 1400px;">
+
+                <div id="mainMap" style="height:400px;width: 700px;padding:10px;float: left">
+                </div>
+
+                <div class="right-area" id="connectionStatus" style="height:500px;width: 300px;padding:10px;float: right">
+                    <h3>权限认证通过率 <b></b></h3>
+                    <div class="area-inbox-1">
+                        <dl>
+                            <dt>上月平均值</dt>
+                            <dd class="font12"><span>76.525%</span><b></b></dd>
+                            <dt class="ml-20">本日权限认证通过率</dt>
+                            <dd class="font-red ml-20"><span>74.113%</span><b></b></dd>
+                            <dt>本月权限认证通过率</dt>
+                            <dd><span>68.113%</span><b></b></dd>
+                        </dl>
+                        <div class="round-1"></div>
+                        <div class="round-2"></div>
+                        <div class="round-3"><dt style="color: #0cb11a;">30%</dt></div>
+                        <div class="round-4"></div>
+                    </div>
+                </div>
+
             </div>
 
             <table class="layui-table">
@@ -173,6 +195,7 @@
                             mapType: 'china',
                             itemStyle:{
                                 normal:{
+                                    show:true,
                                     borderColor:'rgba(100,149,237,1)',
                                     borderWidth:0.5,
                                     areaStyle:{
@@ -322,7 +345,11 @@
                                 },
                                 itemStyle:{
                                     normal:{
-                                        label:{show:false}
+                                        label:{
+                                            formatter: '{b}',
+                                            position: 'right',
+                                            show:true
+                                        }
                                     },
                                     emphasis: {
                                         label:{position:'top'}
@@ -358,11 +385,14 @@
                                 },
                                 itemStyle : {
                                     normal: {
-                                        label:{show:false},
+                                        label:{show:true},
                                         borderWidth:1,
                                         lineStyle: {
                                             type: 'solid',
                                             shadowBlur: 10
+                                        },
+                                        textStyle:{
+                                            fontSize:15
                                         }
                                     }
                                 },
