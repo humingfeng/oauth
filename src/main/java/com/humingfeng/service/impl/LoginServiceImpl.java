@@ -17,6 +17,7 @@ import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 
@@ -33,8 +34,12 @@ public class LoginServiceImpl implements LoginService {
 
     @Autowired
     private SysUserMapper sysUserMapper;
+
     @Autowired
     private PermissionService permissionService;
+
+    @Autowired
+    private RedisTemplate redisTemplate;
 
     /**
      * 登录表单提交
@@ -52,6 +57,9 @@ public class LoginServiceImpl implements LoginService {
         UsernamePasswordToken token = new UsernamePasswordToken(username, password);
         try {
             currentUser.login(token);
+
+            redisTemplate.opsForValue().set(username,token);
+
             returnData.put("result", "success");
         } catch (AuthenticationException e) {
             returnData.put("result", "fail");

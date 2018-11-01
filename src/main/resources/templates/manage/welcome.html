@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html>
+<!--suppress ThymeleafVariablesResolveInspection -->
+<html  xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>欢迎页面</title>
@@ -27,7 +28,7 @@
                     <div class="area-inbox-1">
                         <dl>
                             <dt>上月平均值</dt>
-                            <dd class="font12"><span>76.525%</span><b></b></dd>
+                            <dd class="font12"><span th:text="${lastMonthAverageValue}">76.525%</span><b></b></dd>
                             <dt class="ml-20">本日权限认证通过率</dt>
                             <dd class="font-red ml-20"><span>74.113%</span><b></b></dd>
                             <dt>本月权限认证通过率</dt>

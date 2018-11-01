@@ -6,9 +6,11 @@ import com.humingfeng.service.LoginService;
 import com.humingfeng.shiro.captcha.DreamCaptcha;
 import com.humingfeng.util.CommonUtil;
 import org.apache.shiro.SecurityUtils;
+import org.crazycake.shiro.RedisManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -36,6 +38,8 @@ public class LoginController {
     @Autowired
     private DreamCaptcha dreamCaptcha;
 
+
+
     /**
      * 首页
      * @return
@@ -49,6 +53,9 @@ public class LoginController {
         if(authenticated){
 
             logger.info("已登录");
+
+            //已登录的需要记录认证信息
+
 
 
             ModelAndView mav = new ModelAndView("manage/index");
