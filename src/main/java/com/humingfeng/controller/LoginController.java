@@ -2,9 +2,11 @@ package com.humingfeng.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.humingfeng.config.exception.CommonJsonException;
+import com.humingfeng.service.IpAddressService;
 import com.humingfeng.service.LoginService;
 import com.humingfeng.shiro.captcha.DreamCaptcha;
 import com.humingfeng.util.CommonUtil;
+import com.humingfeng.util.WebUtils;
 import org.apache.shiro.SecurityUtils;
 import org.crazycake.shiro.RedisManager;
 import org.slf4j.Logger;
@@ -38,6 +40,8 @@ public class LoginController {
     @Autowired
     private DreamCaptcha dreamCaptcha;
 
+    @Autowired
+    private IpAddressService ipAddressService;
 
 
     /**
@@ -53,10 +57,6 @@ public class LoginController {
         if(authenticated){
 
             logger.info("已登录");
-
-            //已登录的需要记录认证信息
-
-
 
             ModelAndView mav = new ModelAndView("manage/index");
             return mav;
@@ -85,6 +85,11 @@ public class LoginController {
             //验证码错误
             return CommonUtil.errorJson(E_20012);
         }
+
+        String ipAddress = WebUtils.getIpAddress(request);
+        String cityByIPAddress = ipAddressService.getCityByIPAddress(ipAddress);
+
+        logger.debug("cityByIPAddress:"+cityByIPAddress);
 
 
         CommonUtil.hasAllRequired(requestJson, "username,password,code");

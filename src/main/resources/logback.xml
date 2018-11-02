@@ -54,7 +54,7 @@
     </appender>
 
     <!-- 输出到控制台和文件，可定义更多的 Appender -->
-    <root level="DEBUG">
+    <root level="INFO">
         <appender-ref ref="Console"/>
         <appender-ref ref="AsyncRollingFile"/>
     </root>
